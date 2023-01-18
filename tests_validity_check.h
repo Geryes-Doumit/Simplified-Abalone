@@ -1,0 +1,1 @@
+void run_tests_validity_check();
