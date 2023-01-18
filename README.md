@@ -24,7 +24,8 @@ make tests # Used for testing purposes
 ```bash
 make # To compile the game (if not already done)
 ./abalone -l noir # Play against the AI (you start)
-./abalone -l blan # Play against the AI (AI starts)
+./abalone -l blanc # Play against the AI (AI starts)
+./abalone -pvp # Play against another player locally (black starts)
 ./abalone -s <port> # Host a server on the given port number (no GUI)
 ./abalone -c <IP_address>:<port> # Connect to a server with its port and IP address (no GUI)
 ```
