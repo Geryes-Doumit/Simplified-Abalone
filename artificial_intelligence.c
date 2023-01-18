@@ -259,7 +259,7 @@ void ai_make_move(){
 	int min_max_value;
     for(int i=0; i<size_tab;i++)
 	{
-		min_max_value = min_max(child_board[i], 4, 0, -1000, 1000,player,player_ai);
+		min_max_value = min_max(child_board[i], 2, 0, -1000, 1000,player,player_ai);
 		player = player_ai;
 		if(min_max_value >max_value)
 		{
