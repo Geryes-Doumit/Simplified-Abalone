@@ -1,5 +1,5 @@
 <h1 align="center">Simplified Abalone Game</h1>
-<p align="center">A simplified version of the abalone boardgame with a gui and an AI to play against</p>
+<p align="center">A simplified version of the abalone boardgame with a GUI and an AI to play against (Linux environment)</p>
 <br>
 
 ## Installing GTK3
