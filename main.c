@@ -4,17 +4,17 @@
 #include <ctype.h>
 #include <netdb.h>
 #include <gtk/gtk.h>
-#include "interpret_input.h"
-#include "global_variables.h"
-#include "game_basics.h"
-#include "validity_check.h"
-#include "movement.h"
-#include "ihm.h"
-#include "artificial_intelligence.h"
-#include "network.h"
-#include "tests_validity_check.h"
-#include "test_movement.h"
-#include "test_interpret_input.h"
+#include "src/base_game/interpret_input.h"
+#include "src/base_game/game_basics.h"
+#include "src/global/global_variables.h"
+#include "src/base_game/validity_check.h"
+#include "src/base_game/movement.h"
+#include "src/gui/ihm.h"
+#include "src/base_game/artificial_intelligence.h"
+#include "src/network/network.h"
+#include "src/test/tests_validity_check.h"
+#include "src/test/test_movement.h"
+#include "src/test/test_interpret_input.h"
 
 int main(int argc, char **argv)
 {

@@ -4,14 +4,14 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include "artificial_intelligence.h"
-#include "game_basics.h"
-#include "global_variables.h"
-#include "interpret_input.h"
-#include "movement.h"
-#include "validity_check.h"
-#include "network.h"
-#include "ihm.h"
+#include "../global/global_variables.h"
+#include "../base_game/artificial_intelligence.h"
+#include "../base_game/game_basics.h"
+#include "../base_game/interpret_input.h"
+#include "../base_game/movement.h"
+#include "../base_game/validity_check.h"
+#include "../network/network.h"
+#include "../gui/ihm.h"
 
 int winner = 0;
 

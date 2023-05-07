@@ -7,7 +7,7 @@ MAINSRCS= $(wildcard main*.c)
 
 # Ci-dessous, tous les fichiers *.c à l'exception du ou des précédents, sont 
 # des librairies avec entêtes *.h
-LIBSRCS= $(filter-out $(MAINSRCS), $(wildcard *.c))
+LIBSRCS= $(filter-out $(MAINSRCS), $(wildcard src/*/*.c))
 
 
 CPPFLAGS= -DDEBUG
@@ -36,8 +36,10 @@ $(LIBOBJS) : %.o :%.c %.h $(COMMONHS)
 $(EXECS) : % : %.o $(LIBOBJS)
 	$(CC) $(LDFLAGS) $^  -o abalone $(LDLIBS)
 
+	rm -f *.o */*/*.o
+
 clean: 
-	rm -f abalone *.o
+	rm -f abalone *.o */*/*.o
 
 tests:
 	@make; ./abalone -tests

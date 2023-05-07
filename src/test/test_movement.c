@@ -1,6 +1,6 @@
-#include "movement.h"
-#include "global_variables.h"
-#include "game_basics.h"
+#include "../base_game/movement.h"
+#include "../global/global_variables.h"
+#include "../base_game/game_basics.h"
 #include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
