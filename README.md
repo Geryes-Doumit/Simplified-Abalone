@@ -13,7 +13,8 @@ brew install gtk+3 # macOS
 ## MakeFile options
 
 ```bash
-make # Compiles all the files and makes a main executable called " abalone ", then deletes all the useless compiled files
+make # Compiles all the files and makes a main executable called " abalone ",
+     # then deletes all the useless compiled files
 make clean # Deletes all the executable files, if there are any (" abalone " file included)
 make docs # Creates a doxygen folder using the doxygen config file
 make tests # Used for testing purposes
