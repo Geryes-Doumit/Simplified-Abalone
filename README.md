@@ -9,15 +9,15 @@
 <p align="left">You need to install make to use the makefile so it compiles everything using gcc and gtk3</p>
 
 ```bash
-#gcc
+# gcc
 sudo apt install gcc # Linux
 brew install gcc # macOS
 
-#gtk3
+# gtk3
 sudo apt install libgtk-3-dev # Linux
 brew install gtk+3 # macOS
 
-#make
+# make
 sudo apt install make # Linux
 brew install make # macOS
 
