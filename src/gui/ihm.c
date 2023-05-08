@@ -33,6 +33,7 @@ char buffer[5],last_pos[5];
 const gchar *text;
 static GtkWidget *window, *grid, *layout, *image, *darea, *vBox2, *label2, *label3, *label4, *vBox3, *vBox4;
 GtkWidget *entry;
+int next_turn = 0;
 
 /**
  * \fn draw_arc_black(cairo_t *cr)
@@ -104,6 +105,40 @@ static gboolean on_draw_event_3(GtkWidget *widget, cairo_t *cr, gpointer user_da
     draw_arc_none(cr); /* draw circle NONE in window */
     return FALSE;
     (void)user_data, (void)widget; /* suppress -Wunused warning */
+}
+
+/**
+ * \fn invalid_move_dialog(void)
+ * \brief Display a message if the move entered isn't valid
+ */
+static void invalid_move_dialog(void)
+{
+    // This creates (but does not yet display) a message dialog with
+    // the given text as the title.
+    GtkWidget* hello = gtk_message_dialog_new(
+        NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_OK,
+        "Mouvement invalide !");
+
+    // The (optional) secondary text shows up in the "body" of the
+    // dialog. Note that printf-style formatting is available.
+    gtk_message_dialog_format_secondary_text(
+        GTK_MESSAGE_DIALOG(hello),
+        "Assurez d'entrer un mouvement qui est permis,\net ayant la bonne syntaxe.\nExemple de syntaxe correcte: A1:B1");
+
+    // This displays our message dialog as a modal dialog, waiting for
+    // the user to click a button before moving on. The return value
+    // comes from the :response signal emitted by the dialog. By
+    // default, the dialog only has an OK button, so we'll get a
+    // GTK_RESPONSE_OK if the user clicked the button. But if the user
+    // destroys the window, we'll get a GTK_RESPONSE_DELETE_EVENT.
+    int response = gtk_dialog_run(GTK_DIALOG(hello));
+
+    printf("response was %d (OK=%d, DELETE_EVENT=%d)\n",
+           response, GTK_RESPONSE_OK, GTK_RESPONSE_DELETE_EVENT);
+
+    // If we don't destroy the dialog here, it will still be displayed
+    // (in back) when the second dialog below is run.
+    gtk_widget_destroy(hello);
 }
 
 /**
@@ -316,6 +351,7 @@ void final_window()
 
 void on_activate_entry_ai(gpointer data)
 {
+    next_turn = 0;
     int i = 0;
 
     /* Recuperation du texte contenu dans le GtkEntry */
@@ -349,23 +385,26 @@ void on_activate_entry_ai(gpointer data)
         j2 = input[3];
         if (!is_move_allowed(i1, j1, i2, j2))
         {
-            finished = 1;
-            //printf("Move not allowed");
-            player = player % 2 + 1;
-            final_window();
+            // finished = 1;
+            // //printf("Move not allowed");
+            // player = player % 2 + 1;
+            // final_window();
+            invalid_move_dialog();
         }
         else if (is_move_allowed(i1, j1, i2, j2) == 2)
         {
-
             shift_piece(i1, j1, i2, j2);
             print_board();
             finished = 1;
+            grid_display(grid);
+            gtk_widget_show(grid);
             final_window();
         }
         else
         {
             shift_piece(i1, j1, i2, j2);
             print_board();
+            next_turn = 1;
             player = player % 2 + 1;
         }
 
@@ -418,10 +457,11 @@ void on_activate_entry_pvp(gpointer data)
         j2 = input[3];
         if (!is_move_allowed(i1, j1, i2, j2))
         {
-            finished = 1;
-            //printf("Move notallowed");
-            player = player % 2 + 1;
-            final_window();
+            // finished = 1;
+            // //printf("Move notallowed");
+            // player = player % 2 + 1;
+            // final_window();
+            invalid_move_dialog();
         }
         else if (is_move_allowed(i1, j1, i2, j2) == 2)
         {
@@ -429,6 +469,8 @@ void on_activate_entry_pvp(gpointer data)
             shift_piece(i1, j1, i2, j2);
             print_board();
             finished = 1;
+            grid_display(grid);
+            gtk_widget_show(grid);
             final_window();
         }
         else
@@ -450,7 +492,10 @@ void on_activate_entry_pvp(gpointer data)
 
 void ia_turn()
 {
-    ai_make_move();
+    if (next_turn == 1) {
+        ai_make_move();
+    }
+    next_turn = 0;
     // recupere le coup*
     for (int i = 0; i < 5; i++)
     {
@@ -477,27 +522,29 @@ void ia_turn()
 
         if (!is_move_allowed(i1, j1, i2, j2))
         {
-            finished = 1;
-            //printf("Move not allowed");
-            player = player % 2 + 1;
-            final_window();
+            // finished = 1;
+            // //printf("Move not allowed");
+            // player = player % 2 + 1;
+            // final_window();
         }
         else if (is_move_allowed(i1, j1, i2, j2) == 2)
         {
             shift_piece(i1, j1, i2, j2);
             print_board();
             finished = 1;
+            grid_display(grid);
+            gtk_widget_show(grid);
             final_window();
         }
         else
         {
+            next_turn = 1;
             shift_piece(i1, j1, i2, j2);
             print_board();
             player = player % 2 + 1;
         }
         grid_display(grid); 
         gtk_widget_queue_draw(grid);
-
     }
 }
 
@@ -586,7 +633,8 @@ void init(int argc, char **argv)
     
     if(argc>2 && !strcmp("blanc", argv[2]))
     {
-        g_print("IA is making a move, please wait...");
+        g_print("AI is making a move, please wait...");
+        next_turn = 1;
         ia_turn();
     }
 
