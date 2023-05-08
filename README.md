@@ -3,12 +3,27 @@
 <p align="center">This was a 9-person group project coded in less than two weeks</p>
 <br>
 
-## Installing GTK3
-<p align="left">You need to install GTK3 to compile the source files</p>
+## Installing gcc, gtk3 and make
+<p align="left">You need to install gcc to compile the c source files</p>
+<p align="left">You need to install gtk3 to compile the gui source files</p>
+<p align="left">You need to install make to use the makefile so it compiles everything using gcc and gtk3</p>
 
 ```bash
-apt install libgtk-3-dev # Linux
+#gcc
+sudo apt install gcc # Linux
+brew install gcc # macOS
+
+#gtk3
+sudo apt install libgtk-3-dev # Linux
 brew install gtk+3 # macOS
+
+#make
+sudo apt install make # Linux
+brew install make # macOS
+
+# doxygen (optional, used to generate the documentation)
+sudo apt install doxygen # Linux
+brew install doxygen # macOS
 ```
 ## MakeFile options
 
