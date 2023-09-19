@@ -115,15 +115,15 @@ static void invalid_move_dialog(void)
 {
     // This creates (but does not yet display) a message dialog with
     // the given text as the title.
-    GtkWidget* hello = gtk_message_dialog_new(
+    GtkWidget* invalid_dialog = gtk_message_dialog_new(
         NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_OK,
         "Mouvement invalide !");
 
     // The (optional) secondary text shows up in the "body" of the
     // dialog. Note that printf-style formatting is available.
     gtk_message_dialog_format_secondary_text(
-        GTK_MESSAGE_DIALOG(hello),
-        "Assurez d'entrer un mouvement qui est permis,\net ayant la bonne syntaxe.\nExemple de syntaxe correcte: A1:B1");
+        GTK_MESSAGE_DIALOG(invalid_dialog),
+        "Veuillez entrer un mouvement valide,\net ayant la bonne syntaxe.\nExemple de syntaxe correcte: A1:B1");
 
     // This displays our message dialog as a modal dialog, waiting for
     // the user to click a button before moving on. The return value
@@ -131,14 +131,14 @@ static void invalid_move_dialog(void)
     // default, the dialog only has an OK button, so we'll get a
     // GTK_RESPONSE_OK if the user clicked the button. But if the user
     // destroys the window, we'll get a GTK_RESPONSE_DELETE_EVENT.
-    int response = gtk_dialog_run(GTK_DIALOG(hello));
+    int response = gtk_dialog_run(GTK_DIALOG(invalid_dialog));
 
     printf("response was %d (OK=%d, DELETE_EVENT=%d)\n",
            response, GTK_RESPONSE_OK, GTK_RESPONSE_DELETE_EVENT);
 
     // If we don't destroy the dialog here, it will still be displayed
     // (in back) when the second dialog below is run.
-    gtk_widget_destroy(hello);
+    gtk_widget_destroy(invalid_dialog);
 }
 
 /**
