@@ -1,7 +1,6 @@
 <h1 align="center">Simplified Abalone Game</h1>
 <p align="center">A simplified version of the abalone boardgame with a GUI and an AI to play against (Linux environment)</p>
-<p align="center">This was a 9-person group project coded in less than two weeks</p>
-<p align="center">(minus the small QOL updates made by me afterwards)</p>
+<p align="center">This was a 9-person group project coded in less than two weeks.</p>
 <br>
 
 ## Installing gcc, gtk3 and make
