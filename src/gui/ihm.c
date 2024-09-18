@@ -490,7 +490,7 @@ void on_activate_entry_pvp(gpointer data)
  * \brief Run the main code but for the ia, used in on_activate_entry_ai
  */
 
-void ia_turn()
+int ia_turn()
 {
     if (next_turn == 1) {
         ai_make_move();
@@ -546,6 +546,8 @@ void ia_turn()
         grid_display(grid); 
         gtk_widget_queue_draw(grid);
     }
+
+    return 0;
 }
 
 /**

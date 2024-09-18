@@ -26,6 +26,6 @@ void grid_display(GtkWidget *grid);
 void final_window();
 void init_ai_vs_ai(int argc, char **argv);
 void refresh_display();
-void ia_turn();
+int ia_turn();
 
 #endif
